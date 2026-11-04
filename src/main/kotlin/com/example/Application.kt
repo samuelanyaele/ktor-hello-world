@@ -13,6 +13,8 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.routing.*
+import com.example.concurrent.DashboardService
+import com.example.concurrent.dashboardRoutes
 
 fun main() {
     // Connect to PostgreSQL
@@ -25,6 +27,7 @@ fun main() {
     // New PostgreSQL Task API
     val taskRepository = PostgresTaskRepository()
     val taskService = TaskService(taskRepository)
+    val dashboardService = DashboardService()
 
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         install(ContentNegotiation) {
@@ -34,6 +37,7 @@ fun main() {
         routing {
             bookRoutes(bookService)
             taskRoutes(taskService)
+            dashboardRoutes(dashboardService)
         }
     }.start(wait = true)
 }
