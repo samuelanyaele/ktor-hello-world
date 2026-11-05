@@ -51,3 +51,12 @@ tasks.jacocoTestReport {
         html.required.set(true)
     }
 }
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "com.example.ApplicationKt"
+    }
+    from(configurations.runtimeClasspath.get().map {
+        if (it.isDirectory) it else zipTree(it)
+    })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
