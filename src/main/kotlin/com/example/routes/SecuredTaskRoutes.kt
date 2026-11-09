@@ -1,7 +1,10 @@
+
 package com.example.routes
 
 import com.example.models.Task
-import com.example.services.TaskService
+import com.example.models.TaskRequest
+import com.example.models.TaskResponse
+import com.example.services.CachedTaskService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -9,7 +12,6 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import com.example.auth.JwtConfig
 
 private fun Task.toSecuredResponse() = TaskResponse(
     id = id,
@@ -20,7 +22,7 @@ private fun Task.toSecuredResponse() = TaskResponse(
     createdAt = createdAt.toString()
 )
 
-fun Route.securedTaskRoutes(service: TaskService) {
+fun Route.securedTaskRoutes(service: CachedTaskService) {
     authenticate("auth-jwt") {
         route("/api/tasks") {
 

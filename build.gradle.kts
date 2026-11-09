@@ -34,6 +34,11 @@ dependencies {
     implementation("io.ktor:ktor-server-auth-jwt:2.3.7")
     implementation("com.auth0:java-jwt:4.4.0")
     implementation("org.mindrot:jbcrypt:0.4")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
+    implementation("io.ktor:ktor-server-status-pages:2.3.7")
+    implementation("io.ktor:ktor-server-call-logging:2.3.7")
+    implementation("io.ktor:ktor-server-metrics-micrometer:2.3.7")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.12.2")
 }
 tasks.test {
     useJUnitPlatform()
